@@ -1,2 +1,4 @@
 # auroranemoia.github.io
-My cool portfolio website, built with Astro
+My cool portfolio website, will be built with Astro in the future.
+
+I'm lazy.
