@@ -7,13 +7,12 @@ description: "How to setup Pygmalion to run in the cloud so you can connect to i
 # Running Pygmalion in the cloud
 
 ### ⚠️ This page is unfinished! Come back later. In the meantime here's some links
-Kobold
-https://www.kaggle.com/code/ssnokami/koboldai (Requires NGROK)
 
-https://www.kaggle.com/code/concedo/koboldai-alt-tunnel-2/notebook (Uses a direct tunnel)
+[Kobold 1 (Requires NGROK)](https://www.kaggle.com/code/ssnokami/koboldai)
 
-Pygmalion notebook
-https://www.kaggle.com/code/kman323/pygmalion-gradio-ui
+[Kobold 2 (Uses a direct tunnel)](https://www.kaggle.com/code/concedo/koboldai-alt-tunnel-2/notebook)
+
+[Gradio UI (can be unstable)](https://www.kaggle.com/code/kman323/pygmalion-gradio-ui)
 
 This guide is aimed at users with low-power devices that cannot run the Pygmalion AI models locally.
 
