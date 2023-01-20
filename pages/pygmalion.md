@@ -4,11 +4,21 @@
 
 ## Glossary
 This section is intended to brief you on what all the technical jargon in this document means.
-**CUDA:** A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
-**ROCm:** Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
-**Kobold or KAI:** KoboldAI is an application and runtime to load language models easily.  
-**TavernAI:** A graphical application made specifically to have chats using language models. It can run locally or using a remote server.  
-**VRAM:** Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.  
+
+**CUDA:**  
+A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
+
+**ROCm:**  
+Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
+
+**Kobold or KAI:**  
+KoboldAI is an application and runtime to load language models easily.  
+
+**TavernAI:**  
+A graphical application made specifically to have chats using language models. It can run locally or using a remote server.  
+
+**VRAM:**  
+Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.
 > In Windows Task Manager, you can go to the Performance tab, then click on your graphics card on the left. **Only the "Dedicated Video Memory" section matters.** The other values aren't useful, and do not represent any real amount of memory you may have.
 
 ## System Requirements:
