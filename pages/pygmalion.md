@@ -1,4 +1,10 @@
-# Running Pygmalion locally on Windows (mostly)
+---
+layout: default
+title: Running Pygmalion on Windows
+nav_order: 1
+description: "How to configure Pygmalion to run directly on your own hardware. This guide should hopefully be noob-proof."
+---
+# Running Pygmalion on Windows (mostly)
 
 > If your computer is shit, go here [Running Pygmalion in the cloud](TODO)
 
