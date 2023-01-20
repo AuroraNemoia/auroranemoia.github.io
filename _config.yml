@@ -1,4 +1,3 @@
 title: "Noelle's dumpster"
-remote_theme: niklasbuschmann/contrast
-minimal: true
-lang: "en"
+remote_theme: just-the-docs/just-the-docs
+color_scheme: dark
