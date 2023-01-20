@@ -6,9 +6,12 @@ description: "How to configure Pygmalion to run directly on your own hardware. T
 ---
 # Running Pygmalion on Windows (mostly)
 
-> If your computer is shit, go here [Running Pygmalion in the cloud](TODO)
+> If your computer is shit, go here [Running Pygmalion in the cloud](pygmalion-cloud)
+
+{:toc}
 
 ## Glossary
+{: .no_toc }
 This section is intended to brief you on what all the technical jargon in this document means.
 
 **CUDA:**  
@@ -97,6 +100,8 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 
 ## Adding characters
 If you want to add existing character templates from the community:
+
+You can find characters here: https://rentry.org/pygbotprompts#tavernai-characters
 
 - Go to your Tavern AI folder
 - Go to the public folder
