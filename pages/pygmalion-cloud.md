@@ -1,24 +1,35 @@
 ---
 layout: default
-title: Running Pygmalion on Windows
+title: Running Pygmalion on the cloud
 nav_order: 1
-description: "How to configure Pygmalion to run directly on your own hardware. This guide should hopefully be noob-proof."
+description: "How to setup Pygmalion to run in the cloud so you can connect to it remotely."
 ---
-# Running Pygmalion on Windows (mostly)
+# Running Pygmalion in the cloud
 
-> If your computer is shit, go here [Running Pygmalion in the cloud](pygmalion-cloud)
+### ⚠️ This page is unfinished! Come back later. In the meantime here's some links
+Kobold
+https://www.kaggle.com/code/ssnokami/koboldai (Requires NGROK)
 
-{:toc}
+https://www.kaggle.com/code/concedo/koboldai-alt-tunnel-2/notebook (Uses a direct tunnel)
+
+Pygmalion notebook
+https://www.kaggle.com/code/kman323/pygmalion-gradio-ui
+
+This guide is aimed at users with low-power devices that cannot run the Pygmalion AI models locally.
+
+You will be spinning up a free instance of an online service made mostly for research and AI training. And loading a temporary web server with a private URL on it to be able to chat with the AI.
 
 ## Glossary
-{: .no_toc }
 This section is intended to brief you on what all the technical jargon in this document means.
 
-**CUDA:**  
-A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
+**Notebook:**  
+Short for Jupyter Notebook, this is the name given to .ipynb files, which can be run in Colab, Kaggle, or locally in something like Visual Studio Code. Notebooks are essentially a collection of step-by-step pre-written terminal commands and Python code mashed together that you can edit in-line and run as blocks.
 
-**ROCm:**  
-Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
+**Colab:**  
+A platform created by Google that lets you run intensive GPU compute tasks in the cloud. The free tier is surprisingly good. And it's enough to run the largest Pygmalion model.
+
+**Kaggle:**  
+Similar to Colab, Kaggle is... *also owned by Google*. And offers more options. You may have to verify your account with an SMS code to be able to enable internet access to your notebook.
 
 **Kobold or KAI:**  
 KoboldAI is an application and runtime to load language models easily.  
@@ -29,6 +40,9 @@ A graphical application made specifically to have chats using language models. I
 **VRAM:**  
 Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.
 > In Windows Task Manager, you can go to the Performance tab, then click on your graphics card on the left. **Only the "Dedicated Video Memory" section matters.** The other values aren't useful, and do not represent any real amount of memory you may have.
+
+## Choosing the right notebook:
+It depends if you wish to use 
 
 ## System Requirements:
 Pygmalion is available in 1.3B, 2.7B and 6B variants. They represent the number of parameters in the model. The 1.3B variant needs at least 4GB of VRAM, the 2.7B variant needs at least 6.5GB of VRAM, and the 6B variant needs at least 12GB of VRAM.  
@@ -100,8 +114,6 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 
 ## Adding characters
 If you want to add existing character templates from the community:
-
-You can find characters here: https://rentry.org/pygbotprompts#tavernai-characters
 
 - Go to your Tavern AI folder
 - Go to the public folder
