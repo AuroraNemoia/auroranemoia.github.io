@@ -48,7 +48,7 @@ OK fine, I get it.
 ### Installing KoboldAI:
 - [Download KoboldAI](https://koboldai.org/windows) and run the installer.  
   Make sure you don't have a `B:` drive as that will be used for the installation.  
-  **When you read the updater script, PICK OPTION 2.**
+  **When you reach the updater script, PICK OPTION 2.**
 <!-- - Extract the ZIP to a drive you have at least 25GB of free space on. Using an SSD will speed up startup time for the model a lot.   -->
 <!-- **Use a folder name without spaces at the root of the drive, e.g. `E:\KoboldAI`** -->
   <!-- > If you know your way around git, then just git clone, it'll make updates easier in the future too. -->
