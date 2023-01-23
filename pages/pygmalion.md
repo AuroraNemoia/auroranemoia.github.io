@@ -46,12 +46,14 @@ With Intel cards, you're basically fucked. PyTorch on OpenCL ain't happenin' any
 OK fine, I get it.
 
 ### Installing KoboldAI:
-- [Download KoboldAI](https://github.com/henk717/KoboldAI/archive/refs/heads/united.zip) from here.
-- Extract the ZIP to a drive you have at least 25GB of free space on. Using an SSD will speed up startup time for the model a lot.  
-**Use a folder name without spaces at the root of the drive, e.g. `E:\KoboldAI`**
-  > If you know your way around git, then just git clone, it'll make updates easier in the future too.
-- In the extracted folder, run the `install_requirements.bat` file by double-clicking it. **Though it's recommended to right-click it and Run As Administrator.** Type `2` and press Enter. Then let it do it's thing.
-- When it says `Press any key to continue.` then you're done installing Kobold.
+- [Download KoboldAI](https://koboldai.org/windows) and run the installer.  
+  Make sure you don't have a `B:` drive as that will be used for the installation.  
+  **When you read the updater script, PICK OPTION 2.**
+<!-- - Extract the ZIP to a drive you have at least 25GB of free space on. Using an SSD will speed up startup time for the model a lot.   -->
+<!-- **Use a folder name without spaces at the root of the drive, e.g. `E:\KoboldAI`** -->
+  <!-- > If you know your way around git, then just git clone, it'll make updates easier in the future too. -->
+<!-- - In the extracted folder, run the `install_requirements.bat` file by double-clicking it. **Though it's recommended to right-click it and Run As Administrator.** Type `2` and press Enter. Then let it do it's thing. -->
+<!-- - When it says `Press any key to continue.` then you're done installing Kobold. -->
 
 ### Starting KoboldAI
 In that same folder, double-click on `play.bat` which will start Kobold.
@@ -81,7 +83,7 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 - Once you run `start.bat` the NodeJS server will start.
 - Open https://127.0.0.1:8000 in your browser.
 - You're now in Tavern! but it's not connected.
-- Click the three dots in the top-right of the page
+- Click the hamburger menu (three lines) in the top-right of the page
 - Click on Settings
 - In the API url section, put in `http://127.0.0.1:5000/api`
 - Click Connect.
