@@ -1,4 +1,9 @@
-#### Table of Contents
+---
+layout: default
+title: Running Pygmalion on Linux
+nav_order: 1
+description: "How to setup Pygmalion on Linux-based systems"
+---
 
 
 # Running Pygmalion on Linux Operating systems
