@@ -41,8 +41,9 @@ Unfortunately, Intel card users may encounter difficulties as PyTorch on OpenCL 
 In such cases, it is recommended to utilize cloud-based solutions.
 
 **TL;DR**:
+
 | Model | VRAM  |
-|-------|-------|
+|:------|:------|
 | 6B    | 16GB  |
 | 2.7B  | 6.5GB |
 | 1.3B  | 4GB   |
