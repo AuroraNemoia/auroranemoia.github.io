@@ -6,44 +6,75 @@ description: "How to configure Pygmalion to run directly on your own hardware. T
 ---
 # Running Pygmalion on Windows (mostly)
 
-> If your computer is shit, go here [Running Pygmalion in the cloud](pygmalion-cloud)
+So, you think you've got what it takes to run state-of-the-art conversational AI on your own hardware? Let's put that to the test!
 
-{:toc}
+## System requirements
+
+### **Pygmalion is very heavy, it will eat _13.5GB of VRAM, and up to 18GB_ at the maximum context size of 2048.** There are only a handful of graphics and accelerator cards which can support running the model properly.
+<br>
+
+> The 350m, 1.3B and 2.7B model are not listed here as they are sorely out-of-date and will most likely not give satisfying results. You're free to give them a try, but anything besides 2.7B will quickly become incoherent.
+
+> All 11-12GB RTX cards will be added this list once KoboldAI gains user-friendly support for loading models in 8-bit.
+
+<br>
+
+### Supported NVIDIA graphics cards
+- GeForce RTX 3090 (24GB)
+- GeForce RTX 3090 TI (24GB)
+- GeForce RTX 4090 (24GB)
+- GeForce RTX 4080 (16GB) *you will need to set context size to 1024!
+- Tesla M40 (24GB)
+- Tesla P40 (24GB)
+- Quadro P6000 (24GB)
+- Tesla P100 (16GB) *you will need to set context size to 1024!
+
+> Tesla cards do not have a fan! And require a FULL PCI Express 3.0 16x bus, as well as your motherboard BIOS supporting Above 4G Decoding! (Most professional workstation style PCs, expecially from Dell have a tendency to block out Tesla cards entirely in firmware.)
+
+### Supported AMD graphics cards:
+#### These will _only work on Linux_, because the "ROCm" AI runtime is not available for Mac or Windows.
+- Radeon RX 6800 (16GB) *you will need to set context size to 1024!
+- Radeon RX 6800XT (16GB) *you will need to set context size to 1024!
+- Radeon RX 6900XT (16GB) *you will need to set context size to 1024!
+- Radeon RX 6950XT (16GB) *you will need to set context size to 1024!
+- Radeon RX 7900XT (20GB)
+- Radeon RX 7900XTX (24GB)
+- Instinct MI50 (16GB) *you will need to set context size to 1024!
+
+> More powerful cards exist in the enterprise space, but if you have one of those, why are you even reading this?
+
+### Supported Intel graphics cards:
+![ragequit](https://media.tenor.com/hywZNm_1efkAAAAd/csgo-banging-table.gif)
+
 
 ## Glossary
-{: .no_toc }
-This section is intended to brief you on what all the technical jargon in this document means.
+<details>
+    <summary>Click to expand</summary>
+    
+    This section is intended to brief you on what all the technical jargon in this document means.
 
-**CUDA:**  
-A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
+    **CUDA:**  
+    A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
 
-**ROCm:**  
-Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
+    **ROCm:**  
+    Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
 
-**Kobold or KAI:**  
-KoboldAI is an application and runtime to load language models easily.  
+    **Kobold or KAI:**  
+    KoboldAI is an application and runtime to load language models easily.  
 
-**TavernAI:**  
-A graphical application made specifically to have chats using language models. It can run locally or using a remote server.  
+    **TavernAI:**  
+    A graphical application made specifically to have chats using language models. It can run locally or using a remote server.  
 
-**VRAM:**  
-Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.
-> In Windows Task Manager, you can go to the Performance tab, then click on your graphics card on the left. **Only the "Dedicated Video Memory" section matters.** The other values aren't useful, and do not represent any real amount of memory you may have.
+    **VRAM:**  
+    Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.
+    > In Windows Task Manager, you can go to the Performance tab, then click on your graphics card on the left. **Only the "Dedicated Video Memory" section matters.** The other values aren't useful, and do not represent any real amount of memory you may have.
 
-## System Requirements:
-Pygmalion is available in 1.3B, 2.7B and 6B variants. They represent the number of parameters in the model. The 1.3B variant needs at least 4GB of VRAM, the 2.7B variant needs at least 6.5GB of VRAM, and the 6B variant needs at least 12GB of VRAM.  
-**These numbers say AT LEAST because some extra memory is required to store and process tokens. Usually around 3-4GB. Meaning these numbers are more like 8GB, 11GB and 16GB respectively.**
+</details>
 
-If you can spare the hardware for it, the 6B variant is a LOT better than the smaller ones. Though, the simplicity of running locally without dealing with Colab cannot be understated and the 2.7B model may be enough for many.
+<br>
 
-If you have an NVIDIA GPU with enough VRAM, you're good to go no matter what platform you're running.
-
-With AMD or Intel (LOL, who the fuck has ARC?), the story is a bit different. For AMD, you'll want to check if your card is supported by ROCm High-end RDNA2 (RX 6000) and RDNA3 (RX 7000) cards are supported out-of-the-box, BUT ONLY ON LINUX.
-
-With Intel cards, you're basically fucked. PyTorch on OpenCL ain't happenin' anytime soon and oneAPI won't save you. Just use the cloud.
-
-## Shut the fuck up, I want to run funny AI waifu
-OK fine, I get it.
+## I got one of the funny graphics cards, how do?
+Let's get on with the actual tutorial. These instructions are for Windows. Please refer to [the Linux instructions](pygmalion-linux#installing-dependencies) for AMD cards.
 
 ### Installing KoboldAI:
 - [Download KoboldAI](https://koboldai.org/windows) and run the installer.  
@@ -80,8 +111,7 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 - Run `start.bat`
 
 ### Using Tavern and connecting it to KoboldAI
-- Once you run `start.bat` the NodeJS server will start.
-- Open https://127.0.0.1:8000 in your browser.
+- Once you run `start.bat` the NodeJS server will start, and launch Tavern in your web browser.
 - You're now in Tavern! but it's not connected.
 - Click the hamburger menu (three lines) in the top-right of the page
 - Click on Settings
@@ -96,7 +126,6 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 - Wait for it to load.
 - Kobold can now be left alone.
 - Go to your TavernAI folder, run `start.bat`
-- Open http://127.0.0.1:8000 in your browser
 - Click the three dots in the top-right, and go to `Settings`
 - Click `Connect` next to the API url box.
 
@@ -110,6 +139,11 @@ You can find characters here: https://rentry.org/pygbotprompts#tavernai-characte
 - And finally in the characters folder
 - Create a subfolder with the name of the character then drop the JSON file and the avatar in there.
 - That's it! You'll be able to pick the character in the Tavern UI.
+
+## Reducing context size for 16GB cards
+- In Tavern click on "Settings"
+- Scroll down to "Pro Settings"
+- Set the "Context Size" to "1024 Tokens"
 
 ## Something broke!
 First off, Google is your friend, most of Kobold and Tavern are really just a hodge-podge of existing popular libraries cobbled together into something that works. Meaning most errors you'll encounter, others probably have too.
