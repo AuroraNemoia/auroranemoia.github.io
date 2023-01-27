@@ -87,7 +87,7 @@ Let's get on with the actual tutorial. These instructions are for Windows. Pleas
 <!-- - When it says `Press any key to continue.` then you're done installing Kobold. -->
 
 ### Starting KoboldAI
-In that same folder, double-click on `play.bat` which will start Kobold.
+Start Kobold from the Start Menu shortcut. **Do NOT run as administrator!**
 
 It's important to Note, Kobold can technically be used for chat purposes. Though it is much less user-friendly than Tavern, and doesn't support sending your input to the model in the way Pygmalion likes.
 
@@ -108,7 +108,7 @@ Tavern is more of a chat-oriented frontend for various AI runtimes, including Ko
 First you will need to install NodeJS [using this download link](https://nodejs.org/download/release/v19.1.0/node-v19.1.0-x64.msi) the install should go pretty fast. It's just a *click next, next, next* kinda deal.
 
 - [Download TavernAI](https://github.com/TavernAI/TavernAI/archive/refs/heads/main.zip) and extract it anywhere, it doesn't really matter.
-- Run `start.bat`
+- Run `start.bat` **Do NOT run as administrator!**
 
 ### Using Tavern and connecting it to KoboldAI
 - Once you run `start.bat` the NodeJS server will start, and launch Tavern in your web browser.
@@ -121,11 +121,11 @@ First you will need to install NodeJS [using this download link](https://nodejs.
 - You can now close out of settings and use Tavern! Or you can go to Characters, and create characters.
 
 ### A quick recap for the next time!
-- Go to your KoboldAI folder, run `play.bat`
+- Go to your KoboldAI folder, run `play.bat` **Do NOT run as administrator!**
 - Click `AI` then `Chat models`, then the model you wish to load, then finally click `Load`
 - Wait for it to load.
 - Kobold can now be left alone.
-- Go to your TavernAI folder, run `start.bat`
+- Go to your TavernAI folder, run `start.bat` **Do NOT run as administrator!**
 - Click the three dots in the top-right, and go to `Settings`
 - Click `Connect` next to the API url box.
 
