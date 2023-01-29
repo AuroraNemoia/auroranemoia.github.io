@@ -25,6 +25,17 @@ A graphical application made specifically to have chats using language models. I
 
 
 ## System Requirements:
+
+
+**TL;DR**:
+
+| Model | VRAM  |
+|:------|:------|
+| 6B    | 16GB  |
+| 2.7B  | 6.5GB |
+| 1.3B  | 4GB   |
+
+
 The Pygmalion model is offered in three variations, 1.3 billion, 2.7 billion, and 6 billion parameters respectively.
 These variations reflect the number of parameters present in the model. It is important to note that the 1.3 billion variant
 requires a minimum of 4GB of VRAM, the 2.7 billion variant requires a minimum of 6.5GB of VRAM, and the 6 billion variant
@@ -40,13 +51,7 @@ AMD users should ensure their card is compatible with ROCm and supported by High
 Unfortunately, Intel card users may encounter difficulties as PyTorch on OpenCL is currently not supported and oneAPI will not offer a solution. 
 In such cases, it is recommended to utilize cloud-based solutions.
 
-**TL;DR**:
-
-| Model | VRAM  |
-|:------|:------|
-| 6B    | 16GB  |
-| 2.7B  | 6.5GB |
-| 1.3B  | 4GB   |
+You can also run the 6B model on 8GB of VRAM (provided your card supports CUDA or ROCM) by assigning ~12 layers to the model in KAI, however the inference time will be around 50 seconds for 90 tokens.
 
 
 ## Installing Dependencies
@@ -60,7 +65,7 @@ Install `cuda`. Your package manager may or may not have it, so I'll detail the 
 
 - Fedora: Harder than most. Too complicated to include here, so follow [the official Fedora guide](https://fedoraproject.org/wiki/Cuda) on how to install it.
 
-- openSUSE: ***n official guide, and this method is untested, proceed with caution:*** 
+- openSUSE: ***no official guide, and this method is untested, proceed with caution:*** 
 ```
 zypper addrepo -p 100 http://developer.download.nvidia.com/compute/cuda/repos/opensuse15/x86_64/cuda-opensuse15.repo
 zypper ref
@@ -74,6 +79,10 @@ You may need to change version numbers.
 ```
 paru -S rocm-hip-sdk rocm-opencl-sdk
 ```
+- Manjaro: Same as Arch Linux, but you can use the built-in AUR/Package manager, `pamac`:
+```
+pamac build rocm-hip-sdk rocm-opencl-sdk 
+```
 
 - Other distros: Too complicated to include here, please follow the [official AMD guide](https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation_new.html).
 <!-- I don't have an AMD GPU to test this out. But it should work. -->
@@ -81,22 +90,24 @@ paru -S rocm-hip-sdk rocm-opencl-sdk
 
 
 ## Installing KoboldAI
+KoboldAI has the ability to be used for conversational purposes, but its effectiveness is limited compared to the Tavern framework. It also does not have the ability to efficiently transfer input to the Pygmalion model as intended. As a result, the primary use of KoboldAI is to facilitate a connection between TavernAI and the Pygmalion model.
 
+- Create a directory for Pygmalion; we will install both Tavern and Kobold here: `mkdir pygmalion`
 - Clone the KoboldAI repository in your directory of choice:
 ```bash
-git clone https://github.com/henk717/KoboldAI
+git clone https://github.com/henk717/KoboldAI && cd KoboldAI
 ```
-> I recommend cloning in a folder made for Pygmalion. You'll install Tavern here too.
 
 ### Starting KoboldAI
 
-- Open a terminal instance in the KoboldAI directory
-- Run the `start.sh` file, by typing this in the terminal:
+- Run the `play.sh` for NVIDIA and `.play-rocm.sh` for AMD:
 ```
-./play
+./play.sh
+./play-rocm.sh
 ```
-It is imperative to acknowledge that while the Kobold framework has the capability to function for conversational purposes, its usability is significantly diminished in comparison to the Tavern framework. Additionally, it does not possess the capability to seamlessly transmit input to the Pygmalion model in the manner in which it is optimized to receive. Therefore, KoboldAI serves primarily as a conduit for TavernAI to establish a connection with the artificial intelligence system.
+***NOTE: If this doesn't work for you, and results in infinite loading, scroll down. I'll write a section for setting up Kobold and loading the models manually.***
 
+***NOTE 2: The download size for KAI is roughly 2GB, so it will take a while depending on your bandwidth.***
 
 Once you have the browser tab open on Kobold:
 - Click on `AI` in the top-left
@@ -106,18 +117,45 @@ Once you have the browser tab open on Kobold:
 - Once the download is finished, the model will be loaded to your GPU.
 You can now leave Kobold alone, even close the browser tab, as long as the terminal is open, it will be available for Tavern to use.
 
+### Optional: Setting up KoboldAI manually (skip if running `.play.sh` or `.play-rocm.sh` had no issues)
+
+**Open a terminal window and `cd` into the KoboldAI folder.**
+
+**For NVIDIA cards, run these commands in the directory:**
+```
+wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+bin/micromamba create -f environments/huggingface.yml -r runtime -n koboldai -y
+bin/micromamba create -f environments/huggingface.yml -r runtime -n koboldai -y
+./play.sh
+```
+**For AMD cards, run these commands in the directory:**
+```
+wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+bin/micromamba create -f environments/rocm.yml -r runtime -n koboldai-rocm -y
+bin/micromamba create -f environments/rocm.yml -r runtime -n koboldai-rocm -y
+./play-rocm.sh
+```
+*It is necessary to execute the second command twice during the installation process for both NVIDIA and AMD systems, as there is an issue with micromamba that causes it to fail on the initial run. However, it is important to note that the necessary downloads will not need to be repeated during the second execution.*
+
+**Loading Pygmalion models manually (optional, KAI interface can automatically download any model):**
+
+Download the models from the HF repository, and place them in `KoboldAI/models/pygmalion-6b`:
+
+[pygmalion-6b (main branch)](https://huggingface.co/PygmalionAI/pygmalion-6b/tree/main)
+
+[pygmalion-6b (dev branch)](https://huggingface.co/PygmalionAI/pygmalion-6b/tree/dev)
 
 ## Installing TavernAI
-The Tavern framework serves as a chat-oriented interface for various artificial intelligence runtimes, with Kobold being among them. It facilitates the communication between the user and the underlying AI models, offering a more user-friendly and intuitive experience.
+TavernAI is a chat-based interface that allows easy communication with AI models, including Kobold. It provides a user-friendly and intuitive experience.
 
 - Install `node` through your package manager. Some package managers may use the term `nodejs` instead.
-- Clone the TAI repository in the same directory as Kobold:
+- Clone the TAI repository in the same directory KAI was cloned:
 ```
-git clone https://github.com/TavernAI/TavernAI
+git clone https://github.com/TavernAI/TavernAI && TavernAI
 ```
 
 ### Starting TavernAI and linking it to KoboldAI
-- Open a terminal window in TAI's folder and run `node server.js`
+- In terminal, run `npm i && node server.js`
 - The above step will output a URL, usually `http://127.0.0.1:8000`. Enter this URL in your browser.
 - You're now inside TavernAI. You need to connect it to Kobold now. Do the following:
 - Click on the 3 vertical lines to the top right corner of the TAI screen.
@@ -125,7 +163,7 @@ git clone https://github.com/TavernAI/TavernAI
 - Enter your KoboldAI URL in the `API url` section. Add a `/api` at the end of the url: `http://127.0.0.1:5000/api` or `localhost:5000/api`.
 - Click `Connect` and you're done!
   > You'll have to manually click connect each time you close and reopen or refresh the TavernAI tab.
-- You can now close out of settings and use Tavern! Or you can go to Characters, and create characters.
+- You can now close out of settings and use Tavern! Or you can go to Characters, and create characters. Note that the default character, Chloe, cannot be interacted with.
 
 ## A quick recap for the next time!
 - Go to your KoboldAI folder, run `./play.sh` in Terminal.
@@ -136,6 +174,25 @@ git clone https://github.com/TavernAI/TavernAI
 - Open http://127.0.0.1:8000 or localhost:8000 in your browser. 
 - Click the three vertical lines in the top-right, and go to `Settings`.
 - Click `Connect` next to the API url box.
+
+## Alternatively, here's a shell script to automate running KoboldAI & TavernAI, along with a script to shut them down:
+
+**The start script:** (replace `play.sh` with `play-rocm.sh` for AMD)
+```
+cd KoboldAI
+git pull &
+source play.sh --model PygmalionAI/pygmalion-6b --revision main &
+cd ../TavernAI
+git pull &
+node server.js &
+
+```
+**The stop script:**
+```
+pkill -9 -f "node server"
+pkill -9 -f "aiserver"
+```
+
 
 ## Adding characters
 If you want to add existing character templates from the community:
