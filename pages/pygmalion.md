@@ -53,19 +53,19 @@ So, you think you've got what it takes to run state-of-the-art conversational AI
     
     This section is intended to brief you on what all the technical jargon in this document means.
 
-    **CUDA:**  
+    CUDA:
     A library created by NVIDIA to use compute on their GPUs. Anytime you see CUDA mentioned, assume it only applies to NVIDIA.  
 
-    **ROCm:**  
+    ROCm:  
     Similar to CUDA but for AMD cards. ROCm has less support than CUDA, as it's mostly made for professional enterprise cards, but some consumer cards are supported. Google is your friend on this one.  
 
-    **Kobold or KAI:**  
+    Kobold or KAI: 
     KoboldAI is an application and runtime to load language models easily.  
 
-    **TavernAI:**  
+    TavernAI: 
     A graphical application made specifically to have chats using language models. It can run locally or using a remote server.  
 
-    **VRAM:**  
+    VRAM:
     Video Memory is the RAM on your graphics card. It is much faster and higher bandwidth than the system RAM on your motherboard that connects to the CPU.
     > In Windows Task Manager, you can go to the Performance tab, then click on your graphics card on the left. **Only the "Dedicated Video Memory" section matters.** The other values aren't useful, and do not represent any real amount of memory you may have.
 
@@ -148,4 +148,4 @@ You can find characters here: https://rentry.org/pygbotprompts#tavernai-characte
 ## Something broke!
 First off, Google is your friend, most of Kobold and Tavern are really just a hodge-podge of existing popular libraries cobbled together into something that works. Meaning most errors you'll encounter, others probably have too.
 
-If you can't figure out anything, [Come see us on the unofficial Discord!](https://discord.gg/d4VkgSdNv6)
+If you can't figure out anything, [Come see us on the official Discord!](https://discord.com/invite/bv4xczmcyk)
