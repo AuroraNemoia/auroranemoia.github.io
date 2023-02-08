@@ -6,22 +6,28 @@ description: "How to setup Pygmalion on Linux-based systems"
 ---
 
 
-# Running Pygmalion on Linux Operating systems
+# Running Pygmalion on Linux Operating Systems
 
 ## Glossary
 This section is for terms that might be unknown to the average user inexperienced in running AI models.
 
-**CUDA:**  
+- **CUDA:**  
 A library created by NVIDIA to use compute on their GPUs. Only applies to NVIDIA cards. Use [this list](http://developer.nvidia.com/cuda-gpus) to check if your GPU is compatible.
 
-**ROCm:**  
+- **ROCm:**  
 Similar to CUDA but for AMD cards. Linux support is available, but the majority of consumer grade AMD cards don't support it. [This list](https://github.com/ROCm/ROCm.github.io/blob/master/hardware.md) contains all the AMD GPUs currently supported.
 
-**Kobold or KAI:**  
+- **Kobold or KAI:**  
 KoboldAI is an application and runtime to load language models easily.  
 
-**TavernAI or TAI:**  
+- **TavernAI or TAI:**  
 A graphical application made specifically to have chats using language models. It can run locally or using a remote server. Can act as a frontend for KAI with a nice-looking UI.
+
+- **VRAM:**
+The amount of storage your GPU has access to - this is much faster than your system RAM. You can figure out the exact amount on your card by running `nvidia-smi` on NVIDIA machine. On AMD cards, it's not possible to the same without ROCm installed - you can use `lspci | grep VGA` to find out your card's name, then look it up on the internet for its specifications.
+
+- **Parameters:**
+A model is a set of mathematical equations that help to make predictions or solve problems. In machine learning, a model is trained on a dataset and uses this data to learn how to make predictions. The parameters of a model are the variables that control its behavior. These parameters are learned during the training process, and are used to make predictions on new data. The number of parameters in a model determines its complexity and affects its accuracy and computational cost.
 
 
 ## System Requirements:
@@ -36,22 +42,13 @@ A graphical application made specifically to have chats using language models. I
 | 1.3B  | 4GB   |
 
 
-The Pygmalion model is offered in three variations, 1.3 billion, 2.7 billion, and 6 billion parameters respectively.
-These variations reflect the number of parameters present in the model. It is important to note that the 1.3 billion variant
-requires a minimum of 4GB of VRAM, the 2.7 billion variant requires a minimum of 6.5GB of VRAM, and the 6 billion variant
-requires a minimum of 12GB of VRAM for optimal performance. 
-However, it should be noted that an additional 3-4GB of memory is typically required for storage and processing of tokens, 
-bringing the total memory requirements to approximately 8GB, 11GB, and 16GB respectively.
+The Pygmalion models come in three sizes: 1.3 billion, 2.7 billion, and 6 billion parameters. The size of the model determines the amount of VRAM required to run it: 4GB, 6.5GB, and 12GB respectively. But keep in mind that you'll need 3-4GB of extra memory for processing and storage.
 
-While the 6 billion variant offers superior performance, it is important to consider the simplicity of running the model locally
-without the need for Colab and whether the 2.7 billion variant may suffice for your specific needs.
+The 6 billion model offers the best performance, but the 2.7 billion model may be enough for your needs and is easier to run locally without using Colab. Keep in mind that models below 6B are currently outdated, and as of now, there aren't any plans to update them, since the focus is solely on 6B.
 
-For NVIDIA GPU users, the VRAM requirements can be met with ease. However, for users with AMD or Intel graphics cards, the situation is slightly different.
-AMD users should ensure their card is compatible with ROCm and supported by High-end RDNA2 (RX 6000) and RDNA3 (RX 7000) cards. 
-Unfortunately, Intel card users may encounter difficulties as PyTorch on OpenCL is currently not supported and oneAPI will not offer a solution. 
-In such cases, it is recommended to utilize cloud-based solutions.
+If you have an NVIDIA GPU, you should be able to meet the VRAM requirements. However, if you have an AMD or Intel GPU, things are different. AMD users can check if their card is compatible with ROCm and supported by high-end RDNA2 or RDNA3 cards. Unfortunately, Intel GPU users may run into issues as PyTorch on OpenCL is not supported. In that case, it's best to use a cloud-based solution.
 
-You can also run the 6B model on 8GB of VRAM (provided your card supports CUDA or ROCM) by assigning ~12 layers to the model in KAI, however the inference time will be around 50 seconds for 90 tokens.
+You can also run the 6B model on 8GB of VRAM (provided your card supports CUDA or ROCM) by assigning ~12 layers to the model in KAI, however the inference time will be around 50 seconds for 90 tokens, depending on your CPU and system RAM speeds.
 
 
 ## Installing Dependencies
@@ -61,7 +58,7 @@ You can also run the 6B model on 8GB of VRAM (provided your card supports CUDA o
 Install `cuda`. Your package manager may or may not have it, so I'll detail the installation here for the popular base distros:
 - Arch/Manjaro: The easiest of them all. Simply run `sudo pacman -S cuda`.
 
-- Debian: Run `apt install nvidia-cuda-dev nvidia-cuda-toolkit`
+- Debian/Ubuntu: Run `apt update && apt install build-essentials && apt install nvidia-cuda-dev nvidia-cuda-toolkit`
 
 - Fedora: Harder than most. Too complicated to include here, so follow [the official Fedora guide](https://fedoraproject.org/wiki/Cuda) on how to install it.
 
@@ -72,6 +69,8 @@ zypper ref
 zypper install cuda-libraries-10-2 cuda-libraries-dev-10-2 cuda-compiler-10-2
 ```
 You may need to change version numbers.
+
+**Confirm the installation's success by running `nvcc --version`**
 
 ### AMD
 
@@ -90,10 +89,10 @@ pamac build rocm-hip-sdk rocm-opencl-sdk
 
 
 ## Installing KoboldAI
-KoboldAI has the ability to be used for conversational purposes, but its effectiveness is limited compared to the Tavern framework. It also does not have the ability to efficiently transfer input to the Pygmalion model as intended. As a result, the primary use of KoboldAI is to facilitate a connection between TavernAI and the Pygmalion model.
+KoboldAI has the ability to be used for conversational purposes, but its effectiveness is limited compared to TavernAI. It also does not have the ability to efficiently transfer input to the Pygmalion model as intended. As a result, the primary use of KoboldAI is to facilitate a connection between TavernAI and the Pygmalion model.
 
 - Create a directory for Pygmalion; we will install both Tavern and Kobold here: `mkdir pygmalion`
-- Clone the KoboldAI repository in your directory of choice:
+- Clone the KoboldAI repository:
 ```bash
 git clone https://github.com/henk717/KoboldAI && cd KoboldAI
 ```
@@ -145,10 +144,12 @@ Download the models from the HF repository, and place them in `KoboldAI/models/p
 
 [pygmalion-6b (dev branch)](https://huggingface.co/PygmalionAI/pygmalion-6b/tree/dev)
 
+
+
 ## Installing TavernAI
 TavernAI is a chat-based interface that allows easy communication with AI models, including Kobold. It provides a user-friendly and intuitive experience.
 
-- Install `node` through your package manager. Some package managers may use the term `nodejs` instead.
+- Install `nodejs` through your package manager.
 - Clone the TAI repository in the same directory KAI was cloned:
 ```
 git clone https://github.com/TavernAI/TavernAI && TavernAI
@@ -164,6 +165,8 @@ git clone https://github.com/TavernAI/TavernAI && TavernAI
 - Click `Connect` and you're done!
   > You'll have to manually click connect each time you close and reopen or refresh the TavernAI tab.
 - You can now close out of settings and use Tavern! Or you can go to Characters, and create characters. Note that the default character, Chloe, cannot be interacted with.
+
+#### Keep in mind that for 16GB Cards, the context size in TavernAI's settings need to be lowered to 1400, in order to prevent OOM (out of memory) issues.
 
 ## A quick recap for the next time!
 - Go to your KoboldAI folder, run `./play.sh` in Terminal.
@@ -197,21 +200,23 @@ pkill -9 -f "aiserver"
 ## Adding characters
 If you want to add existing character templates from the community:
 
-You can find characters here: https://rentry.org/pygbotprompts#tavernai-characters
+You can find characters at the [rentry](https://rentry.org/pygbotprompts#tavernai-characters) or the [official discord](https://discord.gg/bv4xczmcyk):
 
-- Go to your Tavern AI folder
-- Go to the public folder
-- And finally in the characters folder
-- Create a subfolder with the name of the character then drop the JSON file and the avatar in there.
-- That's it! You'll be able to pick the character in the Tavern UI.
+- Open TavernAI and navigate to `Characters`
+- Click on the `+Import` button, this is located right next to the `+` button used for creating a new character.
+- You're done.
+
+
+## Softprompts
+Softprompts in language models are a way to provide a model with some context or a starting point before it generates text. In the case of PygmalionAI, the majority softprompts available are related to specific anime series or topics. By providing a softprompt, the model can generate text that is more relevant and focused on the specific context provided. This is particularly useful for those who want to generate conversations or dialogues about their favorite series. The softprompt helps the model generate text that is more specific to the anime fan's interests and tastes.
+
+- Download your softprompt of choice from the [official discord server](https://discord.gg/bv4xczmcyk).
+- Add your softprompts in `.zip` format to the `KoboldAI/softprompts`.
+- Make sure KoboldAI is running, and pygmalion is already loaded.
+- An option for softprompts should appear in KoboldAI UI. There, you can load it in.
+- Have fun! 
 
 ## Something broke!
 First off, Google is your friend, most of Kobold and Tavern are really just a hodge-podge of existing popular libraries cobbled together into something that works. Meaning most errors you'll encounter, others probably have too.
 
-If you can't figure out anything, [Come see us on the Official Discord!](https://discord.gg/bv4xczmcyk)
-
-
-
-
-
-
+If you can't figure out anything, [Come see us on the Official Discord!](https://discord.gg/bv4xczmcyk).
