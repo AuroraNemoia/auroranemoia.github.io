@@ -1,89 +1,130 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AuroraNemoia</title>
-        <meta property="og:title" content="AuroraNemoia"/>
-        <meta name="description" content="This is just a static landing page for now."/>
-        <meta property="og:type" content="website">
-        <meta property="og:description" content="This is just a static landing page for now."/>
-        <meta property="twitter:image:src" content="https://nemoia.ai/opengraph.png"/>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="theme-color" content="#2A9FD6"/>
-        <!-- Bootstrap! -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="theme.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        
-        <div class="jumbotron">
-            <div class="container">
-                <h2>My name is Noelle!</h2>
-                <p>I go by AuroraNemoia online.</p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="#socials">See my socials</a>
-                    <a class="btn btn-lg btn-default" href="https://www.youtube.com/watch?v=7NyN8ikEGio" role="button">idk what this one does.</a>
-                </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noelle Nemoia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <meta property="og:title" content="Noelle Nemoia"/>
+    <meta name="description" content="Welcome to my personal website!"/>
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Welcome to my personal website!"/>
+    <meta property="twitter:image:src" content="https://nemoia.ai/opengraph.png"/>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1E3C5D"/>
+</head>
+<body>
+    <div class="header">
+        <div class="socials">
+            <div class="pfp shadow hoverable">
+                <img src="pfp.png" alt="">
+            </div>
+            <div class="content">
+                <span class="name shadow hoverable">Noelle Nemoia</span>
+                <div class="links">
+                    <a href="https://twitter.com/AuroraNemoia">
+                        <div id="twitter" class="social-button innerglow shadow hoverable"></div>
+                    </a>
+                    <a href="https://github.com/AuroraNemoia">
+                        <div id="github" class="social-button innerglow shadow hoverable"></div>
+                    </a>
+                    <a href="https://soundcloud.com/AuroraNemoia">
+                        <div id="soundcloud" class="social-button innerglow shadow hoverable"></div>
+                    </a>
+                    <a href="https://auroranemoia.bandcamp.com">
+                        <div id="bandcamp" class="social-button innerglow shadow hoverable"></div>
+                    </a>
+                </div>
             </div>
         </div>
-
-        <div class="container ">
-            <img src="header.png" class="img-fluid" alt="Responsive image">
-            <h1>Who am I?</h1>
-            <p>I've never been a huge fan of introductions, but they're a necessary evil I suppose.</p>
-            <p>My name is Noelle, (I already said that) and I'm a huge fan of AI, VR, and tech in general.</p>
-            <p>I've helped, led, and built numerous tech-related projects over the years.</p>
-            <p>Here's some of them.</p>
-            <p>Oh yeah, <a href="https://gist.github.com/AuroraNemoia/3c78c5dc217853b2b295493870e91403">here's what I like to call the shacks list</a> (consoles, phones, computers, and what I use them for)</p>
-
-            <h1>Funny projects:</h1>
-            
-            <div class="list-group">
-                <a href="https://k2vr.tech" class="list-group-item active">
-                    <h4 class="list-group-item-heading">K2VR Team & Amethyst</h4>
-                    <p class="list-group-item-text">As part of K2VR Team, I've been the project lead, and managed the awesome team that worked on releasing Amethyst, a Windows app for body tracking using community-made plugins.<br><br>In my time in K2VR Team, I and everyone else have researched a lot into how the old tech works, and we plan on implementing our own reimagining of Microsoft's tracking SDK, built with modern day AI techniques while still benefiting from the Kinect depth map to save on resources.</p>
-                </a>
-                <a href="https://discord.nemoia.ai" class="list-group-item">
-                    <h4 class="list-group-item-heading">Ena and Stella Nemoia</h4>
-                    <p class="list-group-item-text">This is very recent and in active development, but I've started building complex AIs using self-hosted large language models at the core. I hold this project near to my heart.</p>
-                </a>
-                <a href="https://github.com/auroranemoia/optometrist" class="list-group-item">
-                    <h4 class="list-group-item-heading">Optometrist</h4>
-                    <p class="list-group-item-text">A suite of tools to improve the experience when using Rift and Rift S on Windows. This is still in the planning stages. Other projects are more important.</p>
-                </a>
-                <a href="https://getaughip.com" class="list-group-item">
-                    <h4 class="list-group-item-heading">Augmented Hip</h4>
-                    <p class="list-group-item-text">I designed the website for Hekky's Augmented Hip software.</p>
-                </a>
-                <a href="https://vignetteapp.org" class="list-group-item">
-                    <h4 class="list-group-item-heading">Vignette</h4>
-                    <p class="list-group-item-text">I contributed to the brand identity (logo, wordmark, colorways) of Vignette, an upcoming opensource modular app for VTubers.</p>
-                </a>
-                <a href="https://bots.gg" class="list-group-item">
-                    <h4 class="list-group-item-heading">Discord Bots</h4>
-                    <p class="list-group-item-text">I designed the current look of bots.gg (The Vue implementation was not by me.) The entire website and backend are being rewritten and redesigned because the needs of the team have exceeded the old system's capabilities.</p>
-                </a>
-                <a href="#" class="list-group-item">
-                    <h4 class="list-group-item-heading">Nebula sound theme</h4>
-                    <p class="list-group-item-text">[NO LINK YET!] A set of soothing CC0 sounds to use in any app or project you want. Originally made for a revival project of VaNiiMenu.</p>
-                </a>
+    </div>
+    <div class="main innerglow shadow">
+        <h1>Hello!</h1>
+        <p>I hope this email finds you well. Wait, this is a website. My name is Noelle. I go by AuroraNemoia online. Or sometimes just Nemoia, and sometimes just Aurora.
+        <br><br>I'm a dumb girl with a big dream, the size of which is only dwarfed by my love for others. I find caring for people and listening to their side to be incredibly important and powerful.
+        <br><br>On this page you'll find links to a bunch of places and people I think are really cool. And to things I've created or helped work on.
+        </p>
+        <br>
+        <h1>Portfolio</h1>
+        <p>
+        Here's some things I worked on or created.
+        </p>
+        <br>
+        <div class="folio-item shadow" id="unikara">
+            <img src="unikara.png" alt="">
+            <div class="folio-details">
+                <span>Unikara</span>
+                <p><i>Meaningful digital friendship</i><br>Working as project creator and lead developer.</p>
+                <a class="folio-button" href="https://unikara.moe">Go to site</a>
             </div>
-            
-            <h1>My socials</h1>
-            
-            <div class="list-group" id="socials">
-                <a rel="me" href="https://wetdry.world/@AuroraNemoia" class="list-group-item active">Mastodon (@AuroraNemoia@wetdry.world)</a>
-                <a href="https://twitter.com/AuroraNemoia" class="list-group-item">Twitter (@AuroraNemoia)</a>
-                <a href="https://github.com/AuroraNemoia" class="list-group-item">GitHub (AuroraNemoia)</a>
-                <a href="https://auroranemoia.bandcamp.com" class="list-group-item">My music on Bandcamp</a>
-                <a href="https://soundcloud.com/AuroraNemoia" class="list-group-item">Soundcloud</a>
-            </div>
-            
-            <h1>This is it</h1>
-            <p>This website will gain a lot more things in the future, I swear.<br><br>I'm just too busy with other projects and stuff.<br><br></p>
         </div>
-        
-    </body>
+        <br>
+        <div class="folio-item shadow" id="vignette">
+            <img src="vignette.png" alt="">
+            <div class="folio-details">
+                <span>Vignette</span>
+                <p><i>Open-source VTuber toolkit</i><br>Helped in the creation of the logo, wordmark, and brand design.</p>
+                <a class="folio-button" href="https://vignetteapp.org">Go to site</a>
+            </div>
+        </div>
+        <br>
+        <div class="folio-item shadow" id="pygmalion">
+            <img src="pygmalion.png" alt="">
+            <div class="folio-details">
+                <span>PygmalionAI</span>
+                <p><i>Online AI characters and chat</i><br>Done most of the web design, branding and logo.</p>
+                <a class="folio-button" href="https://pygmalion.chat/explore">Go to site</a>
+            </div>
+        </div>
+        <br>
+        <div class="folio-item shadow" id="dbots">
+            <img src="dbots.png" alt="">
+            <div class="folio-details">
+                <span>bots.gg</span>
+                <p><i>The original Discord bot list</i><br>Redesigned the website.</p>
+                <a class="folio-button" href="https://bots.gg">Go to site</a>
+            </div>
+        </div>
+        <br><br>
+        <h1>My music</h1>
+        <br>
+        <div class="folio-item shadow" id="inorbit">
+            <img src="inorbit.png" alt="">
+            <div class="folio-details">
+                <span>IN ORBIT</span>
+                <p><i>Featuring Eleanor Forte</i><br>A complete album by me. Art by LightDreamer.<br></p>
+                <a class="folio-button" href="https://auroranemoia.itch.io/in-orbit">Listen now</a>
+            </div>
+        </div>
+        <br>
+        <div class="folio-item shadow" id="garbage">
+            <img src="garbage.png" alt="">
+            <div class="folio-details">
+                <span>Garbage</span>
+                <p><i>Music without a home</i><br>All the stuff that hasn't been finished or given a home yet. Cover is a lame joke.<br></p>
+                <a class="folio-button" href="https://auroranemoia.itch.io/garbage">Listen now</a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <h1>Cool people and places</h1>
+        <br>
+        <p>Here's the promised cool people list</p>
+        <br>
+        <h2>oofdere</h2>
+        <p>Says he's useless and apparently not cool. But I think that's a load of bullshit.</p>
+        <p>Find oofdere on <a href="https://twitter.com/oofdere">Twitter</a> and <a href="https://github.com/oofdere">Github</a>!</p>
+        <p>Also works on Unikara, so based by default.</p>
+        <br>
+        <h2>Rudyon</h2>
+        <p>Rudy is cool person who makes blog and AI assistant thing.</p>
+        <p>You can find them on <a href="https://twitter.com/rxdyxn">Twitter</a> and <a href="https://rudyon.github.io/">on their blog</a>.</p>
+        <br>
+        <p>Other links TBD</p>
+    </div>
+</body>
 </html>
