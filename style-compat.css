@@ -3,7 +3,7 @@
 :root {
   --background-primary: #0d1b2d;
   --background-secondary: #12294b;
-  --twitter: #508bdf;
+  --bluesky: #508bdf;
   --github: #452087;
   --soundcloud: #e44e13;
   --bandcamp: #01b68c;
@@ -103,9 +103,9 @@ body {
   height: 3em;
 }
 
-#twitter {
-  background-color: var(--twitter);
-  background-image: url("twitter.svg");
+#bluesky {
+  background-color: var(--bluesky);
+  background-image: url("bluesky.svg");
 }
 
 #github {

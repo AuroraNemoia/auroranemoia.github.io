@@ -2,7 +2,7 @@
 :root{
     --background-primary: #0d1b2d;
     --background-secondary: #12294B;
-    --twitter: #508BDF;
+    --bluesky: #1081F6;
     --github: #452087;
     --soundcloud: #E44E13;
     --bandcamp: #01B68C;
@@ -91,9 +91,9 @@ body{
     background-repeat: no-repeat;
 }
 
-#twitter{
-    background-color: var(--twitter);
-    background-image: url(twitter.svg);
+#bluesky{
+    background-color: var(--bluesky);
+    background-image: url(bluesky.svg);
 }
 #github{
     background-color: var(--github);
